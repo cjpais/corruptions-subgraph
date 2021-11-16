@@ -1,0 +1,11 @@
+enum Channel {
+  CORRUPTION
+  REFLECTION
+}
+
+type Message @entity {
+  id: ID!
+  created: BigInt!
+  channel: Channel!
+  message: String!
+}

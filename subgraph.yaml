@@ -1,0 +1,47 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: CorruptionsDataChannel
+    network: mainnet
+    source:
+      address: "0x90ccc00699222a9870dbcfb980512a6ea40edb6f"
+      abi: CorruptionsDataChannel
+      startBlock: 13615636
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Message
+      abis:
+        - name: CorruptionsDataChannel
+          file: ./abis/CorruptionsDataChannel.json
+      # eventHandlers:
+      #   - event: Message(indexed string)
+      #     handler: handleCorruptionMessage
+      callHandlers:
+        - function: postMessage(string)
+          handler: handleCorruptionMessage
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: ReflectionsDataChannel
+    network: mainnet
+    source:
+      address: "0xfeeda52dc1c570533b68efc9a6daa2d212bcc836"
+      abi: ReflectionsDataChannel
+      startBlock: 13623404
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Message
+      abis:
+        - name: ReflectionsDataChannel
+          file: ./abis/ReflectionsDataChannel.json
+      callHandlers:
+        - function: postMessage(string)
+          handler: handleReflectionMessage
+      file: ./src/mapping.ts
